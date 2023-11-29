@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player</title>
+    <link rel="stylesheet" href="stylejustin.css">
+    <script src="https://kit.fontawesome.com/4937f18309.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container">
+    <div class="musicplayer">
+        <nav>
+            <div class="circle">
+                <a href="index.html"><i class="fa-solid fa-angle-left"></i></a>
+            </div>
+            <div class="circle">
+               <a href="feedback.html"> <i class="fa-solid fa-bars"></i></a>
+            </div>
+        </nav>
+        <img src="pics/justin.jpg" class="song-img">
+        <h1>10,000 Hours</h1>
+        <p>Justin Bieber</p>
+
+        <audio  id="song">
+            <source src="pics/Pop-Dan + Shay, Justin Bieber - 10,000 Hours (Lyrics).mp3" type="audio/mpeg">
+        </audio>
+        <input type="range" value="0" id="progress">
+        <div class="controls">
+            <div><i class="fa-solid fa-backward"></i></div>
+            <div onclick="playPause()"><i class="fa-solid fa-play" id="ctrlIcon"></i></div>
+            <div><a href="kabira.html"><i class="fa-solid fa-forward"></i></div></a>
+        </div>
+    </div>
+</div>
+<script>
+
+    let progress = document.getElementById("progress");
+    let song = document.getElementById("song");
+    let ctrlIcon = document.getElementById("ctrlIcon");
+
+    song.onloadeddata = function(){
+        progress.max = song.duration;
+        progress.value = song.currentTime;
+    }
+
+    function playPause(){
+        if(ctrlIcon.classList.contains("fa-pause")){
+            song.pause()
+            ctrlIcon.classList.remove("fa-pause")
+            ctrlIcon.classList.add("fa-play")
+        }
+        else{
+            song.play()
+            ctrlIcon.classList.remove("fa-play")
+            ctrlIcon.classList.add("fa-pause")
+        }
+    }
+        if(song.play()){
+            setInterval(()=>{
+                progress.value = song.currentTime
+            },500);
+        }
+    progress.onchange =function(){
+        song.play();
+        song.currentTime = progress.value;
+        ctrlIcon.classList.remove("fa-play")
+        ctrlIcon.classList.add("fa-pause")
+    }
+    
+</script>
+</body>
+</html>
